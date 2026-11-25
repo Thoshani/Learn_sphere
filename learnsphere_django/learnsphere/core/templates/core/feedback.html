@@ -1,0 +1,8 @@
+{% extends "core/base.html" %}{% load ls_extras %}
+{% block content %}
+<h1>💬 Feedback</h1><p class="sub">Share your experience and help us improve</p>
+<div class="card"><form method="post">{% csrf_token %}
+<label>Rate your experience</label>{{ form.rating }}<label>Your feedback</label>{{ form.message }}{{ form.message.errors }}
+<br><button class="block">📨 Submit Feedback</button></form></div>
+{% if mine %}<h3>Your Previous Feedback</h3>{% for f in mine %}<div class="card"><div class="row"><small>{{ f.created_at|date:"Y-m-d" }}</small><span>{{ f.rating|stars }}</span></div>{{ f.message }}</div>{% endfor %}{% endif %}
+{% endblock %}

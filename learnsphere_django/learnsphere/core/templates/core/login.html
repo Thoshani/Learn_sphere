@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+{% block auth %}
+<div class="card">
+  <form method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <label>Username</label>{{ form.username }}{{ form.username.errors }}
+    <label>Password</label>{{ form.password }}{{ form.password.errors }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="block" style="margin-top:14px">Login →</button>
+  </form>
+  <form method="post" action="{% url 'demo_login' %}">{% csrf_token %}<button class="btn sec block" style="background:#fff;color:#5B8DEF;border:1px solid #C3D6FF">Demo Login</button></form>
+  <p style="text-align:center">No account? <a href="{% url 'signup' %}">Sign up</a></p>
+</div>
+<div class="grid g2">
+  <div class="card" style="text-align:center">🤖<br><b>AI Course Generator</b></div>
+  <div class="card" style="text-align:center">📝<br><b>Auto Quizzes</b></div>
+  <div class="card" style="text-align:center">📦<br><b>Smart Modules</b></div>
+  <div class="card" style="text-align:center">📄<br><b>PDF Export</b></div>
+</div>
+{% endblock %}
