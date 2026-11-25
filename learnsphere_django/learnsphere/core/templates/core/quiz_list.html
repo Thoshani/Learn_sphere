@@ -1,7 +1,0 @@
-{% extends "core/base.html" %}
-{% block content %}
-<h1>📝 Take Quiz</h1><p class="sub">Test your knowledge with AI-generated questions</p>
-{% for c in courses %}<div class="card"><b>📘 {{ c.name }}</b>
-{% for m in c.modules.all %}<div class="row" style="margin-top:8px"><span>{{ m.title }} <small>({{ m.questions.all|length }} questions)</small></span><a class="btn" href="{% url 'quiz_take' m.pk %}">Start</a></div>{% endfor %}</div>
-{% empty %}<div class="card" style="text-align:center">No quizzes yet. <a href="{% url 'generate' %}">Generate a course</a> first.</div>{% endfor %}
-{% endblock %}

@@ -1,9 +1,0 @@
-{% extends "core/base.html" %}{% load ls_extras %}
-{% block content %}
-<h1>💌 All Feedback</h1><br>
-<div class="grid g4"><div class="stat"><div class="n">{{ total }}</div><div class="l">Total</div></div>
-<div class="stat"><div class="n">{{ avg }}/5</div><div class="l">Avg Rating</div></div>
-<div class="stat"><div class="n">{{ positive }}</div><div class="l">Positive</div></div></div><br>
-{% for f in feedback %}<div class="card"><div class="row"><b>{{ f.user.display_name }} <small>@{{ f.user.username }}</small></b><span>{{ f.rating|stars }} <small>{{ f.created_at|date:"Y-m-d" }}</small></span></div>{{ f.message }}</div>
-{% empty %}<div class="card">No feedback yet.</div>{% endfor %}
-{% endblock %}

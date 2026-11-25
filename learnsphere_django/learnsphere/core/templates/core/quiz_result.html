@@ -1,9 +1,0 @@
-{% extends "core/base.html" %}{% load ls_extras %}
-{% block content %}
-<div class="card" style="text-align:center"><div class="{{ attempt.pct|pct_class }}" style="font-size:2.5rem;font-weight:800">{{ attempt.pct }}%</div>
-<b>{{ grade }}</b><br>{{ attempt.score }} / {{ attempt.total }} correct</div>
-{% for r in rows %}<div class="card"><b>Q{{ forloop.counter }}. {{ r.q.text }}</b>
-{% for k,v in r.q.options %}<div class="opt {% if k == r.q.answer %}right{% elif k == r.chosen %}wrong{% endif %}">{% if k == r.q.answer %}✅{% elif k == r.chosen %}❌{% else %}○{% endif %} {{ k }}) {{ v }}</div>{% endfor %}
-{% if r.q.explanation %}<small>💡 {{ r.q.explanation }}</small>{% endif %}</div>{% endfor %}
-<a class="btn" href="{% url 'quiz_take' module.pk %}">🔄 Retake Quiz</a> <a class="btn sec" href="{% url 'progress' %}">📊 My Progress</a>
-{% endblock %}

@@ -1,8 +1,0 @@
-{% extends "core/base.html" %}
-{% block auth %}
-<div class="card"><form method="post">{% csrf_token %}
-  {{ form.non_field_errors }}
-  {% for f in form %}<label>{{ f.label }}</label>{{ f }}{{ f.errors }}{% endfor %}
-  <button class="block" style="margin-top:14px">Create Account →</button>
-</form><p style="text-align:center">Have an account? <a href="{% url 'login' %}">Login</a></p></div>
-{% endblock %}
