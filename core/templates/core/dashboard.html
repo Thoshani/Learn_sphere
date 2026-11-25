@@ -1,0 +1,23 @@
+{% extends "core/base.html" %}{% load ls_extras %}
+{% block content %}
+<h1>Welcome back, {{ user.display_name }}! 👋</h1><p class="sub">Ready to learn something new today?</p>
+<div class="grid g4">
+  <div class="stat"><div class="n">{{ courses_count }}</div><div class="l">Courses Available</div></div>
+  <div class="stat"><div class="n">{{ quizzes_taken }}</div><div class="l">Quizzes Taken</div></div>
+  <div class="stat"><div class="n">{{ avg_score }}%</div><div class="l">Avg Score</div></div>
+  <div class="stat"><div class="n">{{ my_modules }}</div><div class="l">My Modules</div></div>
+</div><br>
+<div class="grid g3">
+  <div><h3>Recent Activity</h3>
+    {% for a in recent %}<div class="card row"><div><b>📝 {{ a.module.title }}</b><br><small>{{ a.created_at|date:"Y-m-d" }}</small></div><b class="{{ a.pct|pct_class }}" style="font-size:1.2rem">{{ a.pct }}%</b></div>
+    {% empty %}<div class="card" style="text-align:center">📖 No activity yet. Generate a course and start learning!</div>{% endfor %}
+  </div>
+  <div><h3>Quick Start</h3>
+    <a class="btn block" href="{% url 'generate' %}">🚀 Generate a Course</a>
+    <a class="btn block" href="{% url 'quiz_list' %}">📝 Take a Quiz</a>
+    <a class="btn block" href="{% url 'tutor' %}">💬 Chat with AI Tutor</a>
+    {% if latest_courses %}<h4>📚 Available Courses</h4>
+    {% for c in latest_courses %}<a href="{% url 'course_detail' c.pk %}"><div class="card"><b>📘 {{ c.name }}</b><br><small>{{ c.level }} · {{ c.n }} modules</small></div></a>{% endfor %}{% endif %}
+  </div>
+</div>
+{% endblock %}

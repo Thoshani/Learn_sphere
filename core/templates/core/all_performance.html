@@ -1,0 +1,6 @@
+{% extends "core/base.html" %}{% load ls_extras %}
+{% block content %}
+<h1>📈 All Performance</h1><br>
+{% for r in rows %}<details><summary>{{ r.u.avatar }} {{ r.u.display_name }} · Avg: {{ r.avg }}% · {{ r.n }} quizzes</summary>
+{% if r.n %}<p>Best: <b>{{ r.best }}%</b></p>{% for a in r.attempts %}<div class="row" style="padding:4px 0"><span>📝 {{ a.module.title }} · {{ a.created_at|date:"Y-m-d" }}</span><b class="{{ a.pct|pct_class }}">{{ a.pct }}% ({{ a.score }}/{{ a.total }})</b></div>{% endfor %}{% else %}<small>No activity yet.</small>{% endif %}</details>{% endfor %}
+{% endblock %}

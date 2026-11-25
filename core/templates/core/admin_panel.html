@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h1>👑 Admin Panel</h1><br>
+<div class="grid g4">
+<div class="stat"><div class="n">{{ users }}</div><div class="l">Total Users</div></div>
+<div class="stat"><div class="n">{{ courses }}</div><div class="l">Courses Created</div></div>
+<div class="stat"><div class="n">{{ attempts }}</div><div class="l">Quiz Attempts</div></div>
+<div class="stat"><div class="n">{{ feedback }}</div><div class="l">Feedback</div></div></div><br>
+<h3>Recently Created Courses</h3>
+{% for c in recent %}<a href="{% url 'course_detail' c.pk %}"><div class="card"><b>📘 {{ c.name }}</b><br><small>by {{ c.owner.username }} · {{ c.created_at|date:"Y-m-d" }} · {{ c.n }} modules · {{ c.get_status_display }}</small></div></a>{% endfor %}
+<a class="btn sec" href="/django-admin/">Open Django admin</a>
+{% endblock %}

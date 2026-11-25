@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h1>🚀 Generate My Course</h1><p class="sub">Tell the AI what you want to learn — it builds the outline, then the full course.</p>
+<div class="card"><form method="post">{% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="grid g2">
+    <div>{% for f in form %}{% if forloop.counter0 < 3 %}<label>{{ f.label }}</label>{{ f }}{{ f.errors }}{% endif %}{% endfor %}</div>
+    <div>{% for f in form %}{% if forloop.counter0 >= 3 %}<label>{{ f.label }}</label>{{ f }}{{ f.errors }}{% endif %}{% endfor %}</div>
+  </div>
+  <br><button class="block" onclick="this.innerText='⏳ Generating outline…'">🤖 Generate Course Outline</button>
+</form></div>
+{% endblock %}

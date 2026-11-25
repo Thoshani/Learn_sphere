@@ -1,0 +1,8 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h1>📝 {{ module.title }}</h1><p class="sub">{{ module.course.name }} · {{ questions|length }} questions · Instant scoring</p>
+<form method="post">{% csrf_token %}
+{% for q in questions %}<div class="card"><b>Q{{ forloop.counter }}. {{ q.text }}</b>
+{% for k,v in q.options %}<label class="opt"><input type="radio" name="q_{{ q.pk }}" value="{{ k }}"> {{ k }}) {{ v }}</label>{% endfor %}</div>{% endfor %}
+<button class="block">🎯 Submit Answers</button></form>
+{% endblock %}

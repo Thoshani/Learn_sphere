@@ -1,0 +1,9 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h1>📦 {% if mine %}My Courses{% else %}All Courses{% endif %}</h1>
+<p class="sub"><a href="{% url 'courses' %}">All published</a> · <a href="{% url 'courses' %}?scope=mine">My courses</a></p>
+{% for c in courses %}
+<a href="{% url 'course_detail' c.pk %}"><div class="card row"><div><b>📘 {{ c.name }}</b><br>
+<span class="badge">{{ c.level }}</span><span class="badge">{{ c.get_status_display }}</span><small> {{ c.n }} modules · by {{ c.owner.display_name }} · {{ c.created_at|date:"Y-m-d" }}</small></div><span>→</span></div></a>
+{% empty %}<div class="card" style="text-align:center">📭 No courses yet. <a href="{% url 'generate' %}">Generate one</a>.</div>{% endfor %}
+{% endblock %}
